@@ -18,14 +18,14 @@ namespace Generator
 
         private void GenerateZones(GameObject zone)
         {
-            int countGeneratedZones = Random.Range(1, 6);
+            int countGeneratedZones = Random.Range(1, 3);
             if (_currentCountGeneratedZones + countGeneratedZones > _countGeneratedZones)
                 countGeneratedZones = _countGeneratedZones - _currentCountGeneratedZones;
             
             for (int i = 0; i < countGeneratedZones; i++)
             {
-                Instantiate(zone, _spawnPoint.position, Quaternion.identity, transform);
-                _spawnPoint.position += Vector3.forward;
+                Instantiate(zone, new Vector3(0, zone.transform.position.y, _spawnPoint.position.z), zone.transform.rotation, transform);
+                _spawnPoint.position += Vector3.forward * 2;
             }
 
             _currentCountGeneratedZones += countGeneratedZones;

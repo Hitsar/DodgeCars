@@ -37,15 +37,6 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""MoveBack"",
-                    ""type"": ""Button"",
-                    ""id"": ""3c05cb0d-69ce-4e0f-8787-26a9159d9596"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""MoveLeft"",
                     ""type"": ""Button"",
                     ""id"": ""0944cb0f-3c03-4665-be83-2ea45ed642a3"",
@@ -97,17 +88,6 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
                     ""action"": ""MoveRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ed90760e-20fd-4aea-933a-0359035a2100"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MoveBack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -117,7 +97,6 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_MoveForward = m_Player.FindAction("MoveForward", throwIfNotFound: true);
-        m_Player_MoveBack = m_Player.FindAction("MoveBack", throwIfNotFound: true);
         m_Player_MoveLeft = m_Player.FindAction("MoveLeft", throwIfNotFound: true);
         m_Player_MoveRight = m_Player.FindAction("MoveRight", throwIfNotFound: true);
     }
@@ -182,7 +161,6 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_MoveForward;
-    private readonly InputAction m_Player_MoveBack;
     private readonly InputAction m_Player_MoveLeft;
     private readonly InputAction m_Player_MoveRight;
     public struct PlayerActions
@@ -190,7 +168,6 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
         private @InputSystem m_Wrapper;
         public PlayerActions(@InputSystem wrapper) { m_Wrapper = wrapper; }
         public InputAction @MoveForward => m_Wrapper.m_Player_MoveForward;
-        public InputAction @MoveBack => m_Wrapper.m_Player_MoveBack;
         public InputAction @MoveLeft => m_Wrapper.m_Player_MoveLeft;
         public InputAction @MoveRight => m_Wrapper.m_Player_MoveRight;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -205,9 +182,6 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
             @MoveForward.started += instance.OnMoveForward;
             @MoveForward.performed += instance.OnMoveForward;
             @MoveForward.canceled += instance.OnMoveForward;
-            @MoveBack.started += instance.OnMoveBack;
-            @MoveBack.performed += instance.OnMoveBack;
-            @MoveBack.canceled += instance.OnMoveBack;
             @MoveLeft.started += instance.OnMoveLeft;
             @MoveLeft.performed += instance.OnMoveLeft;
             @MoveLeft.canceled += instance.OnMoveLeft;
@@ -221,9 +195,6 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
             @MoveForward.started -= instance.OnMoveForward;
             @MoveForward.performed -= instance.OnMoveForward;
             @MoveForward.canceled -= instance.OnMoveForward;
-            @MoveBack.started -= instance.OnMoveBack;
-            @MoveBack.performed -= instance.OnMoveBack;
-            @MoveBack.canceled -= instance.OnMoveBack;
             @MoveLeft.started -= instance.OnMoveLeft;
             @MoveLeft.performed -= instance.OnMoveLeft;
             @MoveLeft.canceled -= instance.OnMoveLeft;
@@ -250,7 +221,6 @@ public partial class @InputSystem: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMoveForward(InputAction.CallbackContext context);
-        void OnMoveBack(InputAction.CallbackContext context);
         void OnMoveLeft(InputAction.CallbackContext context);
         void OnMoveRight(InputAction.CallbackContext context);
     }

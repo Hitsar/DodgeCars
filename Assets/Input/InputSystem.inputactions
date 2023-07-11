@@ -15,15 +15,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "MoveBack",
-                    "type": "Button",
-                    "id": "3c05cb0d-69ce-4e0f-8787-26a9159d9596",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "MoveLeft",
                     "type": "Button",
                     "id": "0944cb0f-3c03-4665-be83-2ea45ed642a3",
@@ -73,17 +64,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "MoveRight",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ed90760e-20fd-4aea-933a-0359035a2100",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MoveBack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
