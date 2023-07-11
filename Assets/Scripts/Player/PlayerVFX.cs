@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Player
 {
@@ -13,7 +14,11 @@ namespace Player
             playerHealth.OnRevival += OnRevival;
         }
 
-        private void OnDie() => _animator.SetTrigger("Die");
+        private void OnDie()
+        {
+            _animator.SetTrigger("Die");
+            SceneManager.LoadScene(0);
+        }
 
         private void OnRevival() => _animator.SetTrigger("Revival");
 
