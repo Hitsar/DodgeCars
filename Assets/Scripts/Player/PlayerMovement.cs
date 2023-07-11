@@ -19,7 +19,7 @@ namespace Player
 
         private void Move(Vector3 direction)
         {
-            transform.DOMove(transform.position + direction, 0.5f);
+            transform.DOMove(transform.position + direction, 0.2f);
             
             if (direction.z == 0)
                 transform.rotation = Quaternion.Euler(0, direction.x * 90, 0);

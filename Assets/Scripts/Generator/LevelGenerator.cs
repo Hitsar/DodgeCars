@@ -2,7 +2,33 @@ using UnityEngine;
 
 namespace Generator
 {
-    public class LevelGenerator
+    public class LevelGenerator : MonoBehaviour
     {
+        [SerializeField] private GameObject _saveZone;
+        [SerializeField] private GameObject _dangerZone;
+        [SerializeField, Min(0)] private int _countGeneratedZones;
+        [SerializeField] private Transform _spawnPoint;
+        private int _currentCountGeneratedZones;
+        
+        private void Start()
+        {
+            while (_currentCountGeneratedZones != _countGeneratedZones)
+                GenerateZones(Random.Range(0, 2) == 0 ? _saveZone : _dangerZone);
+        }
+
+        private void GenerateZones(GameObject zone)
+        {
+            int countGeneratedZones = Random.Range(1, 6);
+            if (_currentCountGeneratedZones + countGeneratedZones > _countGeneratedZones)
+                countGeneratedZones = _countGeneratedZones - _currentCountGeneratedZones;
+            
+            for (int i = 0; i < countGeneratedZones; i++)
+            {
+                Instantiate(zone, _spawnPoint.position, Quaternion.identity, transform);
+                _spawnPoint.position += Vector3.forward;
+            }
+
+            _currentCountGeneratedZones += countGeneratedZones;
+        }
     }
 }
