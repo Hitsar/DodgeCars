@@ -10,7 +10,7 @@ namespace Generator
         [SerializeField] private Transform _spawnPoint;
         private int _currentCountGeneratedZones;
         
-        private void Start()
+        private void Awake()
         {
             while (_currentCountGeneratedZones != _countGeneratedZones)
                 GenerateZones(Random.Range(0, 2) == 0 ? _saveZone : _dangerZone);

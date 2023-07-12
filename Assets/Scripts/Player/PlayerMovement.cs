@@ -1,24 +1,26 @@
-using System.Collections;
 using DG.Tweening;
 using UnityEngine;
-using Zenject;
 
 namespace Player
 {
     public class PlayerMovement : MonoBehaviour
     {
         private PlayerVFX _vfx;
+        private InputSystem _inputSystem;
         private float _time = 0.2f;
-        
-        [Inject]
-        private void Init(InputSystem inputSystem)
+
+        private void Start()
         {
-            _vfx = new PlayerVFX(GetComponent<Animator>(), GetComponent<PlayerHealth>());
+            Finish.Finish finish = FindObjectOfType<Finish.Finish>();
+            finish.OnFinished += OnDisable;
             
-            inputSystem.Player.MoveForward.performed += _ => Move(Vector3.forward);
-            inputSystem.Player.MoveLeft.performed += _ => Move(Vector3.left);
-            inputSystem.Player.MoveRight.performed += _ => Move(Vector3.right);
-            inputSystem.Player.Enable();
+            _vfx = new PlayerVFX(GetComponent<Animator>(), GetComponent<PlayerHealth>(), finish);
+
+            _inputSystem = new InputSystem();
+            _inputSystem.Player.MoveForward.performed += _ => Move(Vector3.forward);
+            _inputSystem.Player.MoveLeft.performed += _ => Move(Vector3.left);
+            _inputSystem.Player.MoveRight.performed += _ => Move(Vector3.right);
+            _inputSystem.Player.Enable();
         }
 
         private void FixedUpdate() => _time -= Time.fixedDeltaTime;
@@ -37,5 +39,7 @@ namespace Player
             _vfx.OnMove();
             _time = 0.2f;
         }
+
+        private void OnDisable() => _inputSystem.Player.Disable();
     }
 }

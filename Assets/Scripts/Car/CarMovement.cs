@@ -6,6 +6,6 @@ namespace Car
     {
         [SerializeField] private float _speed;
 
-        private void FixedUpdate() => transform.Translate(Vector3.left * (_speed * Time.fixedDeltaTime));
+        private void FixedUpdate() => transform.Translate(Vector3.left * (_speed * Time.fixedDeltaTime), Space.World);
     }
 }
