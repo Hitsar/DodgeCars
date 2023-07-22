@@ -21,6 +21,8 @@ namespace Player
             _inputSystem.Player.MoveLeft.performed += _ => Move(Vector3.left);
             _inputSystem.Player.MoveRight.performed += _ => Move(Vector3.right);
             _inputSystem.Player.Enable();
+            
+            GetComponent<PlayerHealth>().OnDie += OnDisable;
         }
 
         private void FixedUpdate() => _time -= Time.fixedDeltaTime;

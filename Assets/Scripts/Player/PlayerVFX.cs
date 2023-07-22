@@ -15,11 +15,7 @@ namespace Player
             finish.OnFinished += OnFinished;
         }
 
-        private void OnDie()
-        {
-            _animator.SetTrigger("Die");
-            SceneManager.LoadScene(0);
-        }
+        private void OnDie() => _animator.SetTrigger("Die");
 
         private void OnRevival() => _animator.SetTrigger("Revival");
 
